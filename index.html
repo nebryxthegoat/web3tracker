@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindBags — Analytics</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="logo" id="sidebar-toggle">FB</div>
+    <div class="nav">
+      <div class="nav-item active" data-page="analytics">
+        <span class="nav-label">Analytics</span>
+      </div>
+      <div class="nav-item" data-page="devs">
+        <span class="nav-label">Devs</span>
+      </div>
+      <div class="nav-item" data-page="roi">
+        <span class="nav-label">ROI</span>
+      </div>
+      <div class="nav-item" data-page="traders">
+        <span class="nav-label">Traders</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ANALYTICS -->
+    <div class="page active" data-page="analytics">
+      <h1 class="page-title">Analytics</h1>
+
+      <div class="metrics-wrapper">
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-value">567.5k</div>
+            <div class="metric-label">Total Volume</div>
+            <div class="metric-delta up">▲ 5.6%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">81.8k</div>
+            <div class="metric-label">Total Traders</div>
+            <div class="metric-delta down">▼ 8.3%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">1.95k</div>
+            <div class="metric-label">Active Traders</div>
+            <div class="metric-delta up">▲ 3.1%</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">3.75M</div>
+            <div class="metric-label">Volume (24h)</div>
+            <div class="metric-delta down">▼ 0.7%</div>
+          </div>
+        </div>
+        <div class="metrics-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">Highest ROI</div>
+          <button class="view-all" data-page="roi">View all →</button>
+        </div>
+        <div class="rows" id="analytics-roi"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">Top Devs</div>
+          <button class="view-all" data-page="devs">View all →</button>
+        </div>
+        <div class="rows" id="analytics-devs"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div class="section-title">Top Traders</div>
+          <button class="view-all" data-page="traders">View all →</button>
+        </div>
+        <div class="rows" id="analytics-traders"></div>
+      </section>
+    </div>
+
+    <!-- DEVS -->
+    <div class="page" data-page="devs">
+      <h1 class="page-title">Top Devs</h1>
+      <section class="section">
+        <div class="rows" id="devs-rows"></div>
+      </section>
+    </div>
+
+    <!-- ROI -->
+    <div class="page" data-page="roi">
+      <h1 class="page-title">Highest ROI</h1>
+      <section class="section">
+        <div class="rows" id="roi-rows"></div>
+      </section>
+    </div>
+
+    <!-- TRADERS -->
+    <div class="page" data-page="traders">
+      <h1 class="page-title">Top Traders</h1>
+      <section class="section">
+        <div class="rows" id="traders-rows"></div>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-wallet">Wallet</h3>
+      <button id="modal-close">×</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
