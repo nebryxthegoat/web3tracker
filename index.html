@@ -6,6 +6,8 @@
   <title>FindBags — Analytics</title>
 
   <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
@@ -14,121 +16,229 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-    <div class="logo" id="sidebar-toggle">FB</div>
-    <div class="nav">
-      <div class="nav-item active" data-page="analytics">
-        <span class="nav-label">Analytics</span>
-      </div>
-      <div class="nav-item" data-page="devs">
-        <span class="nav-label">Devs</span>
-      </div>
-      <div class="nav-item" data-page="roi">
-        <span class="nav-label">ROI</span>
-      </div>
-      <div class="nav-item" data-page="traders">
-        <span class="nav-label">Traders</span>
-      </div>
-    </div>
-  </aside>
+  <div class="logo" id="sidebar-toggle">FB</div>
+  <div class="nav">
+
+    <div class="nav-item active" data-page="analytics">
+  <svg class="nav-icon" viewBox="0 0 24 24">...</svg>
+  <span class="nav-label">Analytics</span>
+</div>
+
+    <div class="nav-item" data-page="devs">
+  <svg class="nav-icon" viewBox="0 0 24 24">...</svg>
+  <span class="nav-label">Analytics</span>
+</div>
+
+    <div class="nav-item" data-page="roi">
+  <svg class="nav-icon" viewBox="0 0 24 24">...</svg>
+  <span class="nav-label">Analytics</span>
+</div>
+
+    <div class="nav-item" data-page="traders">
+  <svg class="nav-icon" viewBox="0 0 24 24">...</svg>
+  <span class="nav-label">Analytics</span>
+</div>
+  </div>
+</aside>
 
   <!-- MAIN -->
   <main class="main">
 
-    <!-- ANALYTICS -->
-    <div class="page active" data-page="analytics">
-      <h1 class="page-title">Analytics</h1>
+  <!-- PAGE: ANALYTICS -->
+  <div class="page active" data-page="analytics">
+  <h1 class="page-title">Analytics</h1>
 
-      <div class="metrics-wrapper">
-        <div class="metrics">
-          <div class="metric">
-            <div class="metric-value">567.5k</div>
-            <div class="metric-label">Total Volume</div>
-            <div class="metric-delta up">▲ 5.6%</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">81.8k</div>
-            <div class="metric-label">Total Traders</div>
-            <div class="metric-delta down">▼ 8.3%</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">1.95k</div>
-            <div class="metric-label">Active Traders</div>
-            <div class="metric-delta up">▲ 3.1%</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">3.75M</div>
-            <div class="metric-label">Volume (24h)</div>
-            <div class="metric-delta down">▼ 0.7%</div>
-          </div>
+  <!-- DEVS LEADERBOARD PAGE -->
+<div class="page" data-page="devs">
+  <h1 class="page-title">Top Devs</h1>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">All Developers</div>
+    </div>
+
+    <div class="rows" id="devs-rows"></div>
+  </section>
+</div>
+
+<!-- ROI LEADERBOARD PAGE -->
+<div class="page" data-page="roi">
+  <h1 class="page-title">Highest ROI</h1>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">All ROI Wallets</div>
+    </div>
+
+    <div class="rows" id="roi-rows"></div>
+  </section>
+</div>
+
+<!-- TRADERS LEADERBOARD PAGE -->
+<div class="page" data-page="traders">
+  <h1 class="page-title">Top Traders</h1>
+
+  <section class="section">
+    <div class="section-header">
+      <div class="section-title">All Traders</div>
+    </div>
+
+    <div class="rows" id="traders-rows"></div>
+  </section>
+</div>
+
+    <!-- METRICS -->
+    <div class="metrics-wrapper">
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-value">567.5k</div>
+          <div class="metric-label">Total Volume</div>
+          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
+          <div class="metric-delta up">▲ 5.6%</div>
         </div>
-        <div class="metrics-dots">
-          <span class="dot active"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
+        <div class="metric">
+          <div class="metric-value">81.8k</div>
+          <div class="metric-label">Total Traders</div>
+          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
+          <div class="metric-delta down">▼ 8.36%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">1.95k</div>
+          <div class="metric-label">Active Traders</div>
+          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
+          <div class="metric-delta up">▲ 5.6%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">3.75M</div>
+          <div class="metric-label">Volume (24h)</div>
+          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
+          <div class="metric-delta down">▼ 8.36%</div>
         </div>
       </div>
 
-      <section class="section">
-        <div class="section-header">
-          <div class="section-title">Highest ROI</div>
-          <button class="view-all" data-page="roi">View all →</button>
-        </div>
-        <div class="rows" id="analytics-roi"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <div class="section-title">Top Devs</div>
-          <button class="view-all" data-page="devs">View all →</button>
-        </div>
-        <div class="rows" id="analytics-devs"></div>
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <div class="section-title">Top Traders</div>
-          <button class="view-all" data-page="traders">View all →</button>
-        </div>
-        <div class="rows" id="analytics-traders"></div>
-      </section>
+      <!-- Mobile dots -->
+      <div class="metrics-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
     </div>
 
-    <!-- DEVS -->
-    <div class="page" data-page="devs">
-      <h1 class="page-title">Top Devs</h1>
-      <section class="section">
-        <div class="rows" id="devs-rows"></div>
-      </section>
-    </div>
+    <!-- HIGHEST ROI -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Highest ROI</div>
+        <button class="btn btn-secondary view-all" data-page="roi">
+  View all →
+</button>
+      </div>
 
-    <!-- ROI -->
-    <div class="page" data-page="roi">
-      <h1 class="page-title">Highest ROI</h1>
-      <section class="section">
-        <div class="rows" id="roi-rows"></div>
-      </section>
-    </div>
+      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">628×<span class="suffix">TOTAL ROI</span></div></div>
+      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">512×<span class="suffix">TOTAL ROI</span></div></div>
+      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">441×<span class="suffix">TOTAL ROI</span></div></div>
+      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">387×<span class="suffix">TOTAL ROI</span></div></div>
+      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">329×<span class="suffix">TOTAL ROI</span></div></div>
+    </section>
 
-    <!-- TRADERS -->
-    <div class="page" data-page="traders">
-      <h1 class="page-title">Top Traders</h1>
-      <section class="section">
-        <div class="rows" id="traders-rows"></div>
-      </section>
-    </div>
+    <!-- TOP DEVS -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Top Devs</div>
+        <button class="btn btn-secondary view-all" data-page="devs">
+  View all →
+</button>
+      </div>
 
-  </main>
+      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">1.5%<span class="suffix">WIN RATE</span></div></div>
+      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">1.12%<span class="suffix">WIN RATE</span></div></div>
+      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">0.91%<span class="suffix">WIN RATE</span></div></div>
+      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">0.71%<span class="suffix">WIN RATE</span></div></div>
+      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">0.6%<span class="suffix">WIN RATE</span></div></div>
+    </section>
+
+    <!-- TOP TRADERS -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Top Traders</div>
+        <button class="btn btn-secondary view-all" data-page="traders">
+  View all →
+</button>
+      </div>
+
+      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">3.5 SOL<span class="suffix">PNL</span></div></div>
+      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">3.0 SOL<span class="suffix">PNL</span></div></div>
+      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">2.6 SOL<span class="suffix">PNL</span></div></div>
+      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">2.3 SOL<span class="suffix">PNL</span></div></div>
+      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">2.0 SOL<span class="suffix">PNL</span></div></div>
+    </section>
+
+<!-- PAGE: LEADERBOARD -->
+<section class="page" data-page="leaderboard">
+  <h2 class="page-title">Leaderboard</h2>
+</section>
+
+<!-- PAGE: WALLET -->
+<section class="page" data-page="wallet">
+  <h2 class="page-title">Wallet Details</h2>
+</section>
+
+<!-- PAGE: SETTINGS -->
+<section class="page" data-page="settings">
+  <h2 class="page-title">Settings</h2>
+</section>
+
+</main>
 </div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
     <div class="modal-header">
-      <h3 id="modal-wallet">Wallet</h3>
-      <button id="modal-close">×</button>
+      <h3 id="modal-title">Wallet Details</h3>
+      <button class="modal-close" id="modal-close">×</button>
+    </div>
+    <div class="modal-content" id="modal-content">
+
+  <div class="wallet-header">
+    <div class="wallet-address" id="modal-wallet">
+      2hna82....729hsup
+    </div>
+    <div class="wallet-tag">
+      ACTIVE
     </div>
   </div>
+
+  <div class="wallet-stats">
+    <div class="wallet-stat">
+      <div class="stat-label">Total PNL</div>
+      <div class="stat-value positive">+3.5 SOL</div>
+    </div>
+
+    <div class="wallet-stat">
+      <div class="stat-label">Total ROI</div>
+      <div class="stat-value positive">628×</div>
+    </div>
+
+    <div class="wallet-stat">
+      <div class="stat-label">Trades</div>
+      <div class="stat-value">11</div>
+    </div>
+
+    <div class="wallet-stat">
+      <div class="stat-label">Signals</div>
+      <div class="stat-value">3</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-secondary modal-close-btn" disabled>
+  Close
+</button>
+  <button class="btn btn-primary">
+  Track Wallet
+</button>
 </div>
 
 <script src="script.js" defer></script>
