@@ -31,10 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   viewAllButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      switchPage(btn.dataset.page);
-    });
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();          // 🔒 stop bubbling
+    const targetPage = e.currentTarget.dataset.page; // ✅ always correct
+    switchPage(targetPage);
   });
+});
 
   // ===== MODAL =====
   const modal = document.getElementById('modal');
@@ -46,8 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('click', (e) => {
-    const row = e.target.closest('.row');
-    if (!row || !modal) return;
+  if (e.target.closest('.view-all')) return;
+
+  const row = e.target.closest('.row');
+  if (!row) return;
+});
 
     const walletEl = row.querySelector('.wallet');
     if (!walletEl) return;
@@ -112,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
   generateRows('devs-rows', 'devs');
   generateRows('roi-rows', 'roi');
   generateRows('traders-rows', 'traders');
-});
 
 // ===== UTILITY FUNCTIONS (GLOBAL) =====
 
