@@ -52,14 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const row = e.target.closest('.row');
   if (!row) return;
+
+  const walletEl = row.querySelector('.wallet');
+  if (!walletEl) return;
+
+  document.getElementById('modal-wallet').innerText = walletEl.innerText;
+  modal.classList.add('active');
 });
-
-    const walletEl = row.querySelector('.wallet');
-    if (!walletEl) return;
-
-    document.getElementById('modal-wallet').innerText = walletEl.innerText;
-    modal.classList.add('active');
-  });
 
   modalClose?.addEventListener('click', closeModal);
   modalFooterClose?.addEventListener('click', closeModal);
@@ -113,11 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
     goToMetric(0);
   }
 
-  // ===== LEADERBOARD ROWS =====
-  generateRows('devs-rows', 'devs');
-  generateRows('roi-rows', 'roi');
-  generateRows('traders-rows', 'traders');
-
 // ===== UTILITY FUNCTIONS (GLOBAL) =====
 
 function createRow({ wallet, meta, signal, value, suffix }) {
@@ -142,17 +136,17 @@ function generateRows(containerId, type) {
 
   let html = '';
 
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 50; i++) {
     html += createRow({
       wallet: `${type}${i}....${1000 + i}`,
       meta: `${Math.ceil(Math.random() * 5)} SIGNALS • ${10 + i} TRADES`,
       signal: `${Math.ceil(Math.random() * 5)} SIGNALS`,
       value:
-        type === 'roi'
-          ? `${Math.floor(Math.random() * 600)}×`
-          : type === 'traders'
-          ? `${(Math.random() * 5).toFixed(2)} SOL`
-          : `${(Math.random() * 2).toFixed(2)}%`,
+  type === 'roi'
+    ? `${Math.floor(Math.random() * 600)}×`
+    : type === 'traders'
+    ? `${(Math.random() * 5).toFixed(2)} SOL`
+    : `${(Math.random() * 2).toFixed(2)}%`,
       suffix:
         type === 'roi'
           ? 'TOTAL ROI'
@@ -164,3 +158,7 @@ function generateRows(containerId, type) {
 
   container.innerHTML = html;
 }
+
+generateRows('devs-rows', 'devs');
+generateRows('roi-rows', 'roi');
+generateRows('traders-rows', 'traders');})
