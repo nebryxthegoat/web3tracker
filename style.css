@@ -292,8 +292,8 @@ body.sidebar-collapsed .nav-label {
 /* SECTIONS */
 .section {
   background: var(--bg-secondary);
-  border-radius: 18px;
-  padding: 24px;
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
   margin-bottom: var(--space-lg);
   contain: layout paint;
 }
