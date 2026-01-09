@@ -230,6 +230,7 @@ body.sidebar-collapsed .nav-label {
 /* METRICS */
 .metrics-wrapper {
   margin-bottom: 32px;
+  padding: 0 32px;
 }
 
 @media (max-width: 768px) {
@@ -241,9 +242,9 @@ body.sidebar-collapsed .nav-label {
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 32px;
   background: var(--bg-secondary);
-  border-radius: 18px;
+  border-radius: 20px;
   padding: 32px;
   margin-bottom: 32px;
   box-shadow: 0 12px 32px rgba(0,0,0,0.4);
