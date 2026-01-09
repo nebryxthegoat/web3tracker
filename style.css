@@ -175,10 +175,17 @@ body.sidebar-collapsed .nav-label {
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  cursor: pointer;
+  gap: 12px;
+}
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+}
+
+.nav-item.active .nav-icon {
+  color: var(--text-primary);
 }
 
 .nav-label {
