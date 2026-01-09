@@ -228,7 +228,16 @@ body.sidebar-collapsed .nav-label {
 }
 
 /* METRICS */
-.metrics-wrapper { margin-bottom: 32px; }
+.metrics-wrapper {
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .metrics-wrapper {
+    padding: 0 12px;
+  }
+}
+
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -445,9 +454,8 @@ body.sidebar-collapsed .nav-label {
 
   .app { flex-direction: column; }
   .main {
-  padding: 32px 80px 64px;
-  margin-left: 220px;
-  transition: margin-left 180ms ease;
+  padding: 24px 16px calc(64px + var(--mobile-nav-height));
+  margin-left: 0;
 }
 
   /* Bottom nav */
@@ -484,14 +492,16 @@ body.sidebar-collapsed .nav-label {
 
   /* Metrics carousel */
   .metrics {
-  overflow: hidden;
   display: flex;
+  overflow-x: hidden;
   scroll-behavior: smooth;
+  padding: 0;
 }
 
   .metrics > .metric {
   min-width: 100%;
   box-sizing: border-box;
+  padding: 24px;
 }
 
 .metric {
