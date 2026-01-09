@@ -121,6 +121,33 @@ body {
   transition: width 180ms ease;
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  margin-bottom: 24px;
+}
+
+.sidebar-logo {
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-primary);
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.sidebar-toggle:hover {
+  color: var(--text-primary);
+}
+
 body.sidebar-collapsed .sidebar {
   width: var(--sidebar-width);
 }
@@ -141,6 +168,22 @@ body.sidebar-collapsed .main {
 
 body.sidebar-collapsed .nav-label {
   opacity: 0;
+}
+
+body.sidebar-collapsed .sidebar {
+  width: 72px;
+}
+
+body.sidebar-collapsed .nav-label {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-logo {
+  display: none;
+}
+
+body.sidebar-collapsed .sidebar-toggle {
+  transform: rotate(180deg);
 }
 
 .logo {
