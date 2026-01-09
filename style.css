@@ -265,6 +265,7 @@ body.sidebar-collapsed .sidebar-toggle {
 /* MAIN */
 .main {
   position: relative;
+  min-height: 100vh;
   flex: 1;
   padding: 32px 80px 64px;
 }
@@ -281,6 +282,7 @@ body.sidebar-collapsed .sidebar-toggle {
 }
 
 .page.active {
+  position: relative;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
