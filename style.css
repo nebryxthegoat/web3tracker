@@ -612,4 +612,43 @@ body.sidebar-collapsed .sidebar-toggle {
 .metric:not(.active-metric) {
   transform: scale(0.96);
 }
+
+@media (max-width: 768px) {
+  .sidebar-header,
+  .logo,
+  .brand,
+  .sidebar-title {
+    display: none !important;
+  }
 }
+}
+
+@media (max-width: 768px) {
+  /* hide text labels only */
+  .nav-label,
+  .nav-text {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-item svg,
+  .nav-item i {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-item {
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+}
+
+  .nav-item svg,
+  .nav-item i {
+    font-size: 22px;
+  }
