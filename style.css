@@ -431,12 +431,11 @@ body.sidebar-collapsed .main {
 /* ===== PAGE TRANSITIONS ===== */
 .page {
   display: none;
-  opacity: 0;
-  animation: fadeInUp var(--transition-smooth) forwards;
 }
 
 .page.active {
   display: block;
+  animation: fadeInUp var(--transition-smooth) forwards;
 }
 
 @keyframes fadeInUp {
@@ -1320,6 +1319,16 @@ body.sidebar-collapsed .main {
   .main {
     margin-left: 0;
     padding: 24px 20px calc(var(--mobile-nav-height) + 32px);
+    overflow-x: hidden;
+  }
+  
+  .page {
+    min-height: 50vh;
+    opacity: 1 !important;
+  }
+  
+  .page.active {
+    animation: none;
   }
   
   body.sidebar-collapsed .main {
