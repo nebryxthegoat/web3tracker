@@ -34,7 +34,7 @@
   
   /* Sizes */
   --sidebar-width: 260px;
-  --sidebar-collapsed: 110px;
+  --sidebar-collapsed: 80px;
   --mobile-nav-height: 68px;
   
   /* Transitions */
@@ -1279,6 +1279,30 @@ body.sidebar-collapsed .main {
     gap: 4px;
     padding: 12px 8px;
     border-radius: 0;
+    border: none;
+    background: transparent;
+  }
+  
+  .nav-item.active {
+    background: rgba(0, 255, 163, 0.08);
+    border: none;
+    box-shadow: none;
+    position: relative;
+  }
+  
+  .nav-item.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+    border-radius: 0 0 3px 3px;
+  }
+  
+  .nav-item.active::before {
+    display: none;
   }
   
   .nav-item:hover {
