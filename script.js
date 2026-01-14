@@ -1,27 +1,44 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ===== SIDEBAR =====
+  // ===== SIDEBAR TOGGLE =====
   const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebarReopen = document.getElementById('sidebar-reopen');
+  
   sidebarToggle?.addEventListener('click', () => {
     document.body.classList.toggle('sidebar-collapsed');
+  });
+
+  sidebarReopen?.addEventListener('click', () => {
+    document.body.classList.remove('sidebar-collapsed');
   });
 
   // ===== PAGE ROUTING =====
   const pages = document.querySelectorAll('.page');
   const navItems = document.querySelectorAll('.nav-item');
-  const viewAllButtons = document.querySelectorAll('.view-all');
+  const viewAllButtons = document.querySelectorAll('.view-all-btn');
 
   function switchPage(targetPage) {
-    navItems.forEach(i => i.classList.remove('active'));
-    document
-      .querySelector(`.nav-item[data-page="${targetPage}"]`)
-      ?.classList.add('active');
-
-    pages.forEach(page => {
-      page.classList.remove('active');
-      if (page.dataset.page === targetPage) {
-        page.classList.add('active');
+    // Update nav items
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      if (item.dataset.page === targetPage) {
+        item.classList.add('active');
       }
     });
+
+    // Update pages
+    pages.forEach(page => {
+      if (page.dataset.page === targetPage) {
+        page.classList.remove('active');
+        // Trigger reflow
+        void page.offsetWidth;
+        page.classList.add('active');
+      } else {
+        page.classList.remove('active');
+      }
+    });
+
+    // Scroll to top smoothly
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   navItems.forEach(item => {
@@ -31,134 +48,323 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   viewAllButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();          // 🔒 stop bubbling
-    const targetPage = e.currentTarget.dataset.page; // ✅ always correct
-    switchPage(targetPage);
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetPage = btn.dataset.page;
+      switchPage(targetPage);
+    });
   });
-});
 
   // ===== MODAL =====
   const modal = document.getElementById('modal');
   const modalClose = document.getElementById('modal-close');
   const modalFooterClose = document.querySelector('.modal-close-btn');
 
-  function closeModal() {
-    modal.classList.remove('active');
+  function openModal(walletAddress) {
+    document.getElementById('modal-wallet').textContent = walletAddress;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Open modal on row click
   document.addEventListener('click', (e) => {
-  if (e.target.closest('.view-all')) return;
+    // Don't open modal if clicking view-all button
+    if (e.target.closest('.view-all-btn')) return;
 
-  const row = e.target.closest('.row');
-  if (!row) return;
+    const row = e.target.closest('.data-row');
+    if (!row) return;
 
-  const walletEl = row.querySelector('.wallet');
-  if (!walletEl) return;
+    const walletEl = row.querySelector('.wallet-address');
+    if (!walletEl) return;
 
-  document.getElementById('modal-wallet').innerText = walletEl.innerText;
-  modal.classList.add('active');
-});
+    openModal(walletEl.textContent);
+  });
 
   modalClose?.addEventListener('click', closeModal);
   modalFooterClose?.addEventListener('click', closeModal);
 
+  // Close on overlay click
   modal?.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
 
+  // Close on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeModal();
   });
 
-  // ===== METRICS CAROUSEL (MOBILE) =====
-  const metrics = document.querySelector('.metrics');
-  const dots = document.querySelectorAll('.metrics-dots .dot');
-  let currentIndex = 0;
-  let startX = 0;
-
-  function goToMetric(index) {
-    metrics.scrollTo({
-      left: metrics.offsetWidth * index,
-      behavior: 'smooth'
-    });
-
-    dots.forEach(d => d.classList.remove('active'));
-    dots[index]?.classList.add('active');
+  // ===== GENERATE LEADERBOARD DATA =====
+  function createRow({ wallet, meta, badge, value, suffix, rank }) {
+    const rankClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+    return `
+      <div class="data-row" data-rank="${rank}">
+        <div class="rank-badge ${rankClass}">${rank}</div>
+        <div class="row-info">
+          <div class="wallet-address">${wallet}</div>
+          <div class="row-meta">
+            <span class="meta-badge">${badge}</span>
+            <span class="meta-text">${meta}</span>
+          </div>
+        </div>
+        <div class="row-value">
+          <div class="value-main ${suffix === 'PNL' ? 'positive' : ''}">${value}</div>
+          <div class="value-label">${suffix}</div>
+        </div>
+      </div>
+    `;
   }
 
-  if (metrics && dots.length) {
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        currentIndex = i;
-        goToMetric(i);
+  function generateLeaderboard(containerId, type) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    let html = '';
+
+    for (let i = 1; i <= 50; i++) {
+      const signals = Math.ceil(Math.random() * 5);
+      const trades = 5 + Math.ceil(Math.random() * 20);
+      
+      let value, suffix, badge;
+      
+      if (type === 'roi') {
+        value = `${Math.floor(Math.random() * 600) + 50}×`;
+        suffix = 'TOTAL ROI';
+        badge = `${signals} SIGNALS`;
+      } else if (type === 'devs') {
+        value = `${(Math.random() * 95 + 5).toFixed(1)}%`;
+        suffix = 'WIN RATE';
+        badge = `${signals} TOKENS`;
+      } else if (type === 'traders') {
+        value = `+${(Math.random() * 150 + 10).toFixed(1)} SOL`;
+        suffix = 'PNL';
+        badge = `${signals} SIGNALS`;
+      }
+
+      html += createRow({
+        wallet: `${generateRandomHash(6)}...${generateRandomHash(6)}`,
+        meta: `${trades} TRADES`,
+        badge: badge,
+        value: value,
+        suffix: suffix,
+        rank: i
+      });
+    }
+
+    container.innerHTML = html;
+  }
+
+  function generateRandomHash(length) {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
+
+  // Generate leaderboards
+  generateLeaderboard('roi-rows', 'roi');
+  generateLeaderboard('devs-rows', 'devs');
+  generateLeaderboard('traders-rows', 'traders');
+
+  // ===== ANIMATE ON SCROLL =====
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+
+  // Observe sections
+  document.querySelectorAll('.data-section, .metric-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // ===== SPARKLINE ANIMATION =====
+  function animateSparklines() {
+    const sparklines = document.querySelectorAll('.metric-sparkline');
+    sparklines.forEach((sparkline, index) => {
+      setTimeout(() => {
+        sparkline.style.animation = `sparklineWave 3s ease-in-out infinite`;
+        sparkline.style.animationDelay = `${index * 0.2}s`;
+      }, index * 100);
+    });
+  }
+
+  // Add sparkline animation CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes sparklineWave {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(-10px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  animateSparklines();
+
+  // ===== LIVE UPDATE SIMULATION =====
+  function simulateLiveUpdates() {
+    const metricValues = document.querySelectorAll('.metric-value');
+    
+    setInterval(() => {
+      metricValues.forEach(valueEl => {
+        const currentText = valueEl.textContent;
+        // Add a subtle pulse effect
+        valueEl.style.transform = 'scale(1.02)';
+        setTimeout(() => {
+          valueEl.style.transform = 'scale(1)';
+        }, 200);
+      });
+    }, 12000); // Every 12 seconds
+  }
+
+  simulateLiveUpdates();
+
+  // ===== PARALLAX EFFECT FOR GLOWS =====
+  document.addEventListener('mousemove', (e) => {
+    const sidebarGlow = document.querySelector('.sidebar-glow');
+    const mainGlow = document.querySelector('.main-glow');
+    
+    if (sidebarGlow) {
+      const x = (e.clientX / window.innerWidth) * 20;
+      const y = (e.clientY / window.innerHeight) * 20;
+      sidebarGlow.style.transform = `translate(${x}px, ${y}px)`;
+    }
+    
+    if (mainGlow) {
+      const x = (e.clientX / window.innerWidth) * -15;
+      const y = (e.clientY / window.innerHeight) * -15;
+      mainGlow.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  });
+
+  // ===== SMOOTH SCROLL FOR MOBILE =====
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
       });
     });
-
-    metrics.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    });
-
-    metrics.addEventListener('touchend', (e) => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) < 50) return;
-
-      if (diff > 0 && currentIndex < dots.length - 1) currentIndex++;
-      if (diff < 0 && currentIndex > 0) currentIndex--;
-
-      goToMetric(currentIndex);
-    });
-
-    goToMetric(0);
   }
 
-// ===== UTILITY FUNCTIONS (GLOBAL) =====
-
-function createRow({ wallet, meta, signal, value, suffix }) {
-  return `
-    <div class="row">
-      <div>
-        <div class="wallet">${wallet}</div>
-        <div class="meta">${meta}</div>
-      </div>
-      <span class="signal">${signal}</span>
-      <div class="row-right">
-        ${value}
-        <span class="suffix">${suffix}</span>
-      </div>
-    </div>
-  `;
-}
-
-function generateRows(containerId, type) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-
-  let html = '';
-
-  for (let i = 1; i <= 50; i++) {
-    html += createRow({
-      wallet: `${type}${i}....${1000 + i}`,
-      meta: `${Math.ceil(Math.random() * 5)} SIGNALS • ${10 + i} TRADES`,
-      signal: `${Math.ceil(Math.random() * 5)} SIGNALS`,
-      value:
-  type === 'roi'
-    ? `${Math.floor(Math.random() * 600)}×`
-    : type === 'traders'
-    ? `${(Math.random() * 5).toFixed(2)} SOL`
-    : `${(Math.random() * 2).toFixed(2)}%`,
-      suffix:
-        type === 'roi'
-          ? 'TOTAL ROI'
-          : type === 'traders'
-          ? 'PNL'
-          : 'WIN RATE'
+  // ===== ADD STAGGER ANIMATION TO ROWS =====
+  function addStaggerAnimation() {
+    const rows = document.querySelectorAll('.data-row');
+    rows.forEach((row, index) => {
+      row.style.animationDelay = `${index * 0.03}s`;
     });
   }
 
-  container.innerHTML = html;
-}
+  // Run on page load
+  addStaggerAnimation();
 
-generateRows('devs-rows', 'devs');
-generateRows('roi-rows', 'roi');
-generateRows('traders-rows', 'traders');})
+  // Re-run when switching pages
+  const originalSwitchPage = switchPage;
+  switchPage = function(targetPage) {
+    originalSwitchPage(targetPage);
+    setTimeout(addStaggerAnimation, 100);
+  };
+
+  // ===== WALLET ADDRESS COPY TO CLIPBOARD =====
+  document.addEventListener('click', (e) => {
+    const walletAddress = e.target.closest('.wallet-address, .wallet-address-full');
+    if (walletAddress && e.altKey) {
+      const text = walletAddress.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        // Show temporary feedback
+        const originalText = walletAddress.textContent;
+        walletAddress.textContent = 'Copied!';
+        walletAddress.style.color = 'var(--cyan)';
+        
+        setTimeout(() => {
+          walletAddress.textContent = originalText;
+          walletAddress.style.color = '';
+        }, 1000);
+      });
+    }
+  });
+
+  // ===== KEYBOARD SHORTCUTS =====
+  document.addEventListener('keydown', (e) => {
+    // Only trigger if not typing in an input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    switch(e.key) {
+      case '1':
+        switchPage('analytics');
+        break;
+      case '2':
+        switchPage('roi');
+        break;
+      case '3':
+        switchPage('devs');
+        break;
+      case '4':
+        switchPage('traders');
+        break;
+      case 's':
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+          document.body.classList.toggle('sidebar-collapsed');
+        }
+        break;
+    }
+  });
+
+  // ===== PERFORMANCE: DEBOUNCE RESIZE =====
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      // Recalculate any layout-dependent features
+      addStaggerAnimation();
+    }, 250);
+  });
+
+  // ===== INITIAL LOAD ANIMATIONS =====
+  setTimeout(() => {
+    document.querySelectorAll('.metric-card').forEach((card, index) => {
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+  }, 100);
+
+  // ===== ADD GRADIENT ANIMATION TO HERO TEXT =====
+  const gradientText = document.querySelector('.gradient-text');
+  if (gradientText) {
+    let hue = 0;
+    setInterval(() => {
+      hue = (hue + 1) % 360;
+      // This creates a subtle color shift effect
+    }, 50);
+  }
+
+  console.log('🚀 BagsApp Analytics loaded successfully!');
+  console.log('💡 Tip: Alt + Click on wallet addresses to copy');
+  console.log('⌨️ Keyboard shortcuts: 1-4 for pages, Ctrl+S for sidebar');
+});
