@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FindBags — Analytics</title>
+  <title>Web3Go – Solana Memecoin Tracker</title>
 
   <link rel="stylesheet" href="style.css">
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -16,254 +16,626 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar">
-  <div class="sidebar-header">
-  <div class="sidebar-logo">Web3Go</div>
+    <div class="sidebar-glow"></div>
+    
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" stroke="url(#gradient1)" stroke-width="2"/>
+            <path d="M12 16L15 19L20 13" stroke="url(#gradient1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="gradient1" x1="0" y1="0" x2="32" y2="32">
+                <stop offset="0%" stop-color="#00FFA3"/>
+                <stop offset="100%" stop-color="#03E1FF"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">Web3Go</span>
+      </div>
 
-  <button class="sidebar-toggle" id="sidebar-toggle">
-    &gt;
-  </button>
-</div>
-  <div class="nav">
+      <button class="sidebar-toggle" id="sidebar-toggle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
 
-    <div class="nav-item active" data-page="analytics">
-  <span class="nav-icon">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M3 10.5L12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-10.5z"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-  <span class="nav-label">Home</span>
-</div>
+    <!-- Reopen Button (shown when collapsed) -->
+    <button class="sidebar-reopen" id="sidebar-reopen">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
+    <div class="nav">
+      <div class="nav-item active" data-page="analytics">
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="nav-label">Dashboard</span>
+        <span class="nav-indicator"></span>
+      </div>
 
-    <div class="nav-item" data-page="roi">
-  <span class="nav-icon">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2v20M5 9l7-7 7 7"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-  <span class="nav-label">Highest ROI</span>
-</div>
+      <div class="nav-item" data-page="roi">
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2v20M5 9l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="nav-label">Top ROI</span>
+        <span class="nav-indicator"></span>
+      </div>
 
-    <div class="nav-item" data-page="devs">
-  <span class="nav-icon">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M16 11c1.66 0 3-1.79 3-4s-1.34-4-3-4-3 1.79-3 4 1.34 4 3 4zM8 11c1.66 0 3-1.79 3-4S9.66 3 8 3 5 4.79 5 7s1.34 4 3 4zM2 21c0-3 4-5 6-5s6 2 6 5M14 21c0-2.2 2.5-4 5-4s5 1.8 5 4"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-  <span class="nav-label">Top Devs</span>
-</div>
+      <div class="nav-item" data-page="devs">
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="nav-label">Top Devs</span>
+        <span class="nav-indicator"></span>
+      </div>
 
-    <div class="nav-item" data-page="traders">
-  <span class="nav-icon">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M3 3v18h18M7 14l3-3 4 4 5-6"
-        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </span>
-  <span class="nav-label">Top Traders</span>
-</div>
-  </div>
-</aside>
+      <div class="nav-item" data-page="traders">
+        <span class="nav-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="nav-label">Top Traders</span>
+        <span class="nav-indicator"></span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="solana-price">
+        <div class="solana-icon">◎</div>
+        <div class="price-info">
+          <div class="price-label">SOL/USD</div>
+          <div class="price-value">$184.32</div>
+        </div>
+        <div class="price-change positive">+2.4%</div>
+      </div>
+    </div>
+  </aside>
 
   <!-- MAIN -->
   <main class="main">
+    <div class="main-glow"></div>
 
-  <!-- PAGE: ANALYTICS -->
-  <div class="page active" data-page="analytics">
-  </div>
+    <!-- PAGE: ANALYTICS -->
+    <div class="page active" data-page="analytics">
+      
+      <!-- Hero Stats -->
+      <div class="hero-section">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          Live Tracking
+        </div>
+        <h1 class="hero-title">
+          Web3Go <span class="gradient-text">Analytics</span>
+        </h1>
+        <p class="hero-subtitle">Real-time insights into Solana's hottest wallets</p>
+      </div>
 
-  <!-- DEVS LEADERBOARD PAGE -->
-<div class="page" data-page="devs">
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-label">Total Volume</div>
+            <div class="metric-value">567.5K SOL</div>
+            <div class="metric-change positive">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              +5.6%
+            </div>
+          </div>
+          <div class="metric-sparkline cyan"></div>
+        </div>
 
-  <section class="section">
-    <div class="section-header">
-      <div class="section-title">Top devs</div>
+        <div class="metric-card">
+          <div class="metric-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-label">Total Traders</div>
+            <div class="metric-value">81.8K</div>
+            <div class="metric-change negative">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2v8M2 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              -2.3%
+            </div>
+          </div>
+          <div class="metric-sparkline purple"></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-label">Active Traders</div>
+            <div class="metric-value">1,950</div>
+            <div class="metric-change positive">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              +12.4%
+            </div>
+          </div>
+          <div class="metric-sparkline green"></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-icon orange">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="metric-content">
+            <div class="metric-label">24h Volume</div>
+            <div class="metric-value">3.75M SOL</div>
+            <div class="metric-change positive">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 10V2M2 6l4-4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              +8.2%
+            </div>
+          </div>
+          <div class="metric-sparkline orange"></div>
+        </div>
+      </div>
+
+      <!-- Top Performers Section -->
+      <div class="section-grid">
+        <!-- Highest ROI -->
+        <section class="data-section">
+          <div class="section-header">
+            <div class="section-title-wrapper">
+              <div class="section-icon cyan">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2v20M5 9l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h2 class="section-title">Highest ROI</h2>
+            </div>
+            <button class="view-all-btn" data-page="roi">
+              View All
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="data-rows">
+            <div class="data-row" data-rank="1">
+              <div class="rank-badge gold">1</div>
+              <div class="row-info">
+                <div class="wallet-address">2hna82...729hsup</div>
+                <div class="row-meta">
+                  <span class="meta-badge">3 SIGNALS</span>
+                  <span class="meta-text">11 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">628×</div>
+                <div class="value-label">TOTAL ROI</div>
+              </div>
+            </div>
+
+            <div class="data-row" data-rank="2">
+              <div class="rank-badge silver">2</div>
+              <div class="row-info">
+                <div class="wallet-address">9fxk21...3plkwe</div>
+                <div class="row-meta">
+                  <span class="meta-badge">2 SIGNALS</span>
+                  <span class="meta-text">9 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">512×</div>
+                <div class="value-label">TOTAL ROI</div>
+              </div>
+            </div>
+
+            <div class="data-row" data-rank="3">
+              <div class="rank-badge bronze">3</div>
+              <div class="row-info">
+                <div class="wallet-address">7adp88...x9u21e</div>
+                <div class="row-meta">
+                  <span class="meta-badge">4 SIGNALS</span>
+                  <span class="meta-text">14 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">441×</div>
+                <div class="value-label">TOTAL ROI</div>
+              </div>
+            </div>
+
+            <div class="data-row">
+              <div class="rank-badge">4</div>
+              <div class="row-info">
+                <div class="wallet-address">3ke92d...81mdpq</div>
+                <div class="row-meta">
+                  <span class="meta-badge">1 SIGNAL</span>
+                  <span class="meta-text">6 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">387×</div>
+                <div class="value-label">TOTAL ROI</div>
+              </div>
+            </div>
+
+            <div class="data-row">
+              <div class="rank-badge">5</div>
+              <div class="row-info">
+                <div class="wallet-address">5pa01s...lm88qw</div>
+                <div class="row-meta">
+                  <span class="meta-badge">2 SIGNALS</span>
+                  <span class="meta-text">8 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">329×</div>
+                <div class="value-label">TOTAL ROI</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Top Devs -->
+        <section class="data-section">
+          <div class="section-header">
+            <div class="section-title-wrapper">
+              <div class="section-icon purple">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h2 class="section-title">Top Devs</h2>
+            </div>
+            <button class="view-all-btn" data-page="devs">
+              View All
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="data-rows">
+            <div class="data-row" data-rank="1">
+              <div class="rank-badge gold">1</div>
+              <div class="row-info">
+                <div class="wallet-address">2hna82...729hsup</div>
+                <div class="row-meta">
+                  <span class="meta-badge">3 TOKENS</span>
+                  <span class="meta-text">11 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">94.5%</div>
+                <div class="value-label">WIN RATE</div>
+              </div>
+            </div>
+
+            <div class="data-row" data-rank="2">
+              <div class="rank-badge silver">2</div>
+              <div class="row-info">
+                <div class="wallet-address">9fxk21...3plkwe</div>
+                <div class="row-meta">
+                  <span class="meta-badge">2 TOKENS</span>
+                  <span class="meta-text">9 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">89.2%</div>
+                <div class="value-label">WIN RATE</div>
+              </div>
+            </div>
+
+            <div class="data-row" data-rank="3">
+              <div class="rank-badge bronze">3</div>
+              <div class="row-info">
+                <div class="wallet-address">7adp88...x9u21e</div>
+                <div class="row-meta">
+                  <span class="meta-badge">4 TOKENS</span>
+                  <span class="meta-text">14 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">85.7%</div>
+                <div class="value-label">WIN RATE</div>
+              </div>
+            </div>
+
+            <div class="data-row">
+              <div class="rank-badge">4</div>
+              <div class="row-info">
+                <div class="wallet-address">3ke92d...81mdpq</div>
+                <div class="row-meta">
+                  <span class="meta-badge">1 TOKEN</span>
+                  <span class="meta-text">6 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">82.1%</div>
+                <div class="value-label">WIN RATE</div>
+              </div>
+            </div>
+
+            <div class="data-row">
+              <div class="rank-badge">5</div>
+              <div class="row-info">
+                <div class="wallet-address">5pa01s...lm88qw</div>
+                <div class="row-meta">
+                  <span class="meta-badge">2 TOKENS</span>
+                  <span class="meta-text">8 TRADES</span>
+                </div>
+              </div>
+              <div class="row-value">
+                <div class="value-main">78.9%</div>
+                <div class="value-label">WIN RATE</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Top Traders Full Width -->
+      <section class="data-section full-width">
+        <div class="section-header">
+          <div class="section-title-wrapper">
+            <div class="section-icon green">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 class="section-title">Top Traders</h2>
+          </div>
+          <button class="view-all-btn" data-page="traders">
+            View All
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="data-rows">
+          <div class="data-row" data-rank="1">
+            <div class="rank-badge gold">1</div>
+            <div class="row-info">
+              <div class="wallet-address">2hna82...729hsup</div>
+              <div class="row-meta">
+                <span class="meta-badge">3 SIGNALS</span>
+                <span class="meta-text">11 TRADES</span>
+              </div>
+            </div>
+            <div class="row-value">
+              <div class="value-main positive">+128.5 SOL</div>
+              <div class="value-label">PNL</div>
+            </div>
+          </div>
+
+          <div class="data-row" data-rank="2">
+            <div class="rank-badge silver">2</div>
+            <div class="row-info">
+              <div class="wallet-address">9fxk21...3plkwe</div>
+              <div class="row-meta">
+                <span class="meta-badge">2 SIGNALS</span>
+                <span class="meta-text">9 TRADES</span>
+              </div>
+            </div>
+            <div class="row-value">
+              <div class="value-main positive">+96.3 SOL</div>
+              <div class="value-label">PNL</div>
+            </div>
+          </div>
+
+          <div class="data-row" data-rank="3">
+            <div class="rank-badge bronze">3</div>
+            <div class="row-info">
+              <div class="wallet-address">7adp88...x9u21e</div>
+              <div class="row-meta">
+                <span class="meta-badge">4 SIGNALS</span>
+                <span class="meta-text">14 TRADES</span>
+              </div>
+            </div>
+            <div class="row-value">
+              <div class="value-main positive">+84.7 SOL</div>
+              <div class="value-label">PNL</div>
+            </div>
+          </div>
+
+          <div class="data-row">
+            <div class="rank-badge">4</div>
+            <div class="row-info">
+              <div class="wallet-address">3ke92d...81mdpq</div>
+              <div class="row-meta">
+                <span class="meta-badge">1 SIGNAL</span>
+                <span class="meta-text">6 TRADES</span>
+              </div>
+            </div>
+            <div class="row-value">
+              <div class="value-main positive">+72.1 SOL</div>
+              <div class="value-label">PNL</div>
+            </div>
+          </div>
+
+          <div class="data-row">
+            <div class="rank-badge">5</div>
+            <div class="row-info">
+              <div class="wallet-address">5pa01s...lm88qw</div>
+              <div class="row-meta">
+                <span class="meta-badge">2 SIGNALS</span>
+                <span class="meta-text">8 TRADES</span>
+              </div>
+            </div>
+            <div class="row-value">
+              <div class="value-main positive">+65.4 SOL</div>
+              <div class="value-label">PNL</div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <div class="rows" id="devs-rows"></div>
-  </section>
-</div>
+    <!-- PAGE: ROI LEADERBOARD -->
+    <div class="page" data-page="roi">
+      <div class="page-header">
+        <div class="page-title-wrapper">
+          <div class="page-icon cyan">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v20M5 9l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="page-title">Highest ROI Leaderboard</h1>
+        </div>
+        <div class="page-subtitle">Top performing wallets by return on investment</div>
+      </div>
 
-<!-- ROI LEADERBOARD PAGE -->
-<div class="page" data-page="roi">
-
-  <section class="section">
-    <div class="section-header">
-      <div class="section-title">Highest ROI</div>
+      <section class="data-section full-width">
+        <div class="data-rows" id="roi-rows"></div>
+      </section>
     </div>
 
-    <div class="rows" id="roi-rows"></div>
-  </section>
-</div>
+    <!-- PAGE: DEVS LEADERBOARD -->
+    <div class="page" data-page="devs">
+      <div class="page-header">
+        <div class="page-title-wrapper">
+          <div class="page-icon purple">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="page-title">Top Developers</h1>
+        </div>
+        <div class="page-subtitle">Highest win rate token creators</div>
+      </div>
 
-<!-- TRADERS LEADERBOARD PAGE -->
-<div class="page" data-page="traders">
-
-  <section class="section">
-    <div class="section-header">
-      <div class="section-title">Top Traders</div>
+      <section class="data-section full-width">
+        <div class="data-rows" id="devs-rows"></div>
+      </section>
     </div>
 
-    <div class="rows" id="traders-rows"></div>
-  </section>
-</div>
-
-    <!-- METRICS -->
-    <div class="metrics-wrapper">
-      <div class="metrics">
-        <div class="metric">
-          <div class="metric-value">567.5k</div>
-          <div class="metric-label">Total Volume</div>
-          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
-          <div class="metric-delta up">▲ 5.6%</div>
+    <!-- PAGE: TRADERS LEADERBOARD -->
+    <div class="page" data-page="traders">
+      <div class="page-header">
+        <div class="page-title-wrapper">
+          <div class="page-icon green">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 class="page-title">Top Traders</h1>
         </div>
-        <div class="metric">
-          <div class="metric-value">81.8k</div>
-          <div class="metric-label">Total Traders</div>
-          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
-          <div class="metric-delta down">▼ 8.36%</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">1.95k</div>
-          <div class="metric-label">Active Traders</div>
-          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
-          <div class="metric-delta up">▲ 5.6%</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">3.75M</div>
-          <div class="metric-label">Volume (24h)</div>
-          <div class="metric-meta">LIVE • UPDATED 12s AGO</div>
-          <div class="metric-delta down">▼ 8.36%</div>
-        </div>
+        <div class="page-subtitle">Highest profit & loss performers</div>
       </div>
 
-      <!-- Mobile dots -->
-      <div class="metrics-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
+      <section class="data-section full-width">
+        <div class="data-rows" id="traders-rows"></div>
+      </section>
     </div>
 
-    <!-- HIGHEST ROI -->
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">Highest ROI</div>
-        <button class="btn btn-secondary view-all" data-page="roi">
-  View all →
-</button>
-      </div>
-
-      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">628×<span class="suffix">TOTAL ROI</span></div></div>
-      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">512×<span class="suffix">TOTAL ROI</span></div></div>
-      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">441×<span class="suffix">TOTAL ROI</span></div></div>
-      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">387×<span class="suffix">TOTAL ROI</span></div></div>
-      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">329×<span class="suffix">TOTAL ROI</span></div></div>
-    </section>
-
-    <!-- TOP DEVS -->
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">Top Devs</div>
-        <button class="btn btn-secondary view-all" data-page="devs">
-  View all →
-</button>
-      </div>
-
-      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">1.5%<span class="suffix">WIN RATE</span></div></div>
-      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">1.12%<span class="suffix">WIN RATE</span></div></div>
-      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">0.91%<span class="suffix">WIN RATE</span></div></div>
-      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">0.71%<span class="suffix">WIN RATE</span></div></div>
-      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">0.6%<span class="suffix">WIN RATE</span></div></div>
-    </section>
-
-    <!-- TOP TRADERS -->
-    <section class="section">
-      <div class="section-header">
-        <div class="section-title">Top Traders</div>
-        <button class="btn btn-secondary view-all" data-page="traders">
-  View all →
-</button>
-      </div>
-
-      <div class="row"><div><div class="wallet">2hna82....729hsup</div><div class="meta">3 SIGNALS • 11 TRADES</div></div><span class="signal">3 SIGNALS</span><div class="row-right">3.5 SOL<span class="suffix">PNL</span></div></div>
-      <div class="row"><div><div class="wallet">9fxk21....3plkwe</div><div class="meta">2 SIGNALS • 9 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">3.0 SOL<span class="suffix">PNL</span></div></div>
-      <div class="row"><div><div class="wallet">7adp88....x9u21e</div><div class="meta">4 SIGNALS • 14 TRADES</div></div><span class="signal">4 SIGNALS</span><div class="row-right">2.6 SOL<span class="suffix">PNL</span></div></div>
-      <div class="row"><div><div class="wallet">3ke92d....81mdpq</div><div class="meta">1 SIGNAL • 6 TRADES</div></div><span class="signal">1 SIGNAL</span><div class="row-right">2.3 SOL<span class="suffix">PNL</span></div></div>
-      <div class="row"><div><div class="wallet">5pa01s....lm88qw</div><div class="meta">2 SIGNALS • 8 TRADES</div></div><span class="signal">2 SIGNALS</span><div class="row-right">2.0 SOL<span class="suffix">PNL</span></div></div>
-    </section>
-
-<!-- PAGE: LEADERBOARD -->
-<section class="page" data-page="leaderboard">
-  <h2 class="page-title">Leaderboard</h2>
-</section>
-
-<!-- PAGE: WALLET -->
-<section class="page" data-page="wallet">
-  <h2 class="page-title">Wallet Details</h2>
-</section>
-
-<!-- PAGE: SETTINGS -->
-<section class="page" data-page="settings">
-  <h2 class="page-title">Settings</h2>
-</section>
-
-</main>
+  </main>
 </div>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modal">
   <div class="modal">
+    <div class="modal-glow"></div>
+    
     <div class="modal-header">
-      <h3 id="modal-title">Wallet Details</h3>
-      <button class="modal-close" id="modal-close">×</button>
-    </div>
-    <div class="modal-content" id="modal-content">
-
-  <div class="wallet-header">
-    <div class="wallet-address" id="modal-wallet">
-      2hna82....729hsup
-    </div>
-    <div class="wallet-tag">
-      ACTIVE
-    </div>
-  </div>
-
-  <div class="wallet-stats">
-    <div class="wallet-stat">
-      <div class="stat-label">Total PNL</div>
-      <div class="stat-value positive">+3.5 SOL</div>
+      <h3 class="modal-title">Wallet Details</h3>
+      <button class="modal-close" id="modal-close">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
-    <div class="wallet-stat">
-      <div class="stat-label">Total ROI</div>
-      <div class="stat-value positive">628×</div>
+    <div class="modal-content">
+      <div class="wallet-header">
+        <div class="wallet-address-full" id="modal-wallet">2hna82...729hsup</div>
+        <div class="wallet-status active">
+          <span class="status-dot"></span>
+          ACTIVE
+        </div>
+      </div>
+
+      <div class="wallet-stats-grid">
+        <div class="wallet-stat cyan">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="stat-label">Total PNL</div>
+          <div class="stat-value positive">+128.5 SOL</div>
+        </div>
+
+        <div class="wallet-stat purple">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2v20M5 9l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="stat-label">Total ROI</div>
+          <div class="stat-value">628×</div>
+        </div>
+
+        <div class="wallet-stat green">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="stat-label">Total Trades</div>
+          <div class="stat-value">11</div>
+        </div>
+
+        <div class="wallet-stat orange">
+          <div class="stat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="stat-label">Signals</div>
+          <div class="stat-value">3</div>
+        </div>
+      </div>
     </div>
 
-    <div class="wallet-stat">
-      <div class="stat-label">Trades</div>
-      <div class="stat-value">11</div>
-    </div>
-
-    <div class="wallet-stat">
-      <div class="stat-label">Signals</div>
-      <div class="stat-value">3</div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary modal-close-btn">
+        Cancel
+      </button>
+      <button class="btn btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Track Wallet
+      </button>
     </div>
   </div>
 </div>
 
-<div class="modal-footer">
-  <button class="btn btn-secondary modal-close-btn" disabled>
-  Close
-</button>
-  <button class="btn btn-primary">
-  Track Wallet
-</button>
-</div>
-
-<script src="script.js" defer></script>
+<script src="script.js"></script>
 </body>
 </html>
