@@ -376,13 +376,13 @@ body.sidebar-collapsed .nav-indicator {
 }
 
 body.sidebar-collapsed .nav {
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 body.sidebar-collapsed .nav-item {
   justify-content: center;
   align-items: center;
-  padding: 16px 14px;
+  padding: 14px;
   gap: 0;
   width: 100%;
 }
@@ -431,11 +431,12 @@ body.sidebar-collapsed .main {
 /* ===== PAGE TRANSITIONS ===== */
 .page {
   display: none;
+  opacity: 0;
+  animation: fadeInUp var(--transition-smooth) forwards;
 }
 
 .page.active {
   display: block;
-  animation: fadeInUp var(--transition-smooth) forwards;
 }
 
 @keyframes fadeInUp {
@@ -1272,41 +1273,41 @@ body.sidebar-collapsed .main {
   }
   
   .nav-item {
-    flex: 1;
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    padding: 12px 8px;
-    border-radius: 0;
-    border: none;
-    background: transparent;
-  }
-  
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 8px;
+  border-radius: 0;
+  border: none;                  
+  background: transparent;        
+}
+
   .nav-item.active {
-    background: rgba(0, 255, 163, 0.08);
-    border: none;
-    box-shadow: none;
-    position: relative;
-  }
-  
-  .nav-item.active::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--blue));
-    border-radius: 0 0 3px 3px;
-  }
-  
-  .nav-item.active::before {
-    display: none;
-  }
-  
+  background: rgba(0, 255, 163, 0.08); 
+  border: none;                         
+  box-shadow: none;                   
+  position: relative;
+}
+
+  .nav-item.active::after {            
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 0 0 3px 3px;
+}
+
+  .nav-item.active::before {           
+  display: none;
+}
+
   .nav-item:hover {
-    transform: none;
-  }
+  transform: none;
+}
   
   .nav-label {
     font-size: 10px;
@@ -1319,16 +1320,6 @@ body.sidebar-collapsed .main {
   .main {
     margin-left: 0;
     padding: 24px 20px calc(var(--mobile-nav-height) + 32px);
-    overflow-x: hidden;
-  }
-  
-  .page {
-    min-height: 50vh;
-    opacity: 1 !important;
-  }
-  
-  .page.active {
-    animation: none;
   }
   
   body.sidebar-collapsed .main {
